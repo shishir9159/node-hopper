@@ -1,6 +1,21 @@
-# maya
+# sveltekit-monaco-editor
 
-- [ ] zero copy Ring Buffer
-- Aya Library with updated cargo packages
-- refactor previous code to take advantage of new ebpf features added in linux kernel 6.1
-- write in rust 1.71.0
+Simple and quick demo about how to use Monaco Editor in SvelteKit.
+
+## How to use?
+
+Clone this repo and run `npm install` to install all dependencies including Monaco Editor.
+
+Then run `npm run dev` to start the dev server.
+
+## Use case
+
+- [x] Use Monaco Editor in SvelteKit.
+
+## References
+
+- https://medium.com/pickme-engineering-blog/dockerized-go-debugging-with-delve-from-pain-to-productivity-7bb769cb5e2d
+- https://dev.to/lawrencecchen/monaco-editor-svelte-kit-572
+- https://www.codelantis.com/blog/sveltekit-monaco-editor
+- https://github.com/microsoft/monaco-editor/blob/main/samples/browser-esm-vite-react/src/main.tsx (I like this)
+- and many others
