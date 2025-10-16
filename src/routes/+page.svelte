@@ -7,11 +7,11 @@
 	import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 	import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 
-	import { code as jsCode } from '$lib/js_code';
-	import { code as tsCode } from '$lib/ts_code';
-	import { code as phpCode } from '$lib/php_code';
-	import { code as pyCode } from '$lib/py_code';
-	import { code as htmlCode } from '$lib/html_code';
+//	import { code as jsCode } from '$lib/js_code';
+//	import { code as tsCode } from '$lib/ts_code';
+//	import { code as phpCode } from '$lib/php_code';
+//	import { code as pyCode } from '$lib/py_code';
+//	import { code as htmlCode } from '$lib/html_code';
 
 	import { githubAccessToken } from '$lib/tokenStore';
 	import { repoMemory } from '$lib/repoStore';
@@ -112,7 +112,7 @@
 			theme: 'vs-dark'
 		});
 
-		loadCode(jsCode, 'javascript');
+		// loadCode(jsCode, 'javascript');
 	});
 
 	onDestroy(() => {
@@ -141,15 +141,15 @@
         {/if}
     </div>
     <div class="flex gap-x-1 p-1">
-		<button class="w-fit border-2 p-1" on:click={() => loadCode(jsCode, 'javascript')}
+	<!--	<button class="w-fit border-2 p-1" on:click={() => loadCode(jsCode, 'javascript')}
 			>JavaScript</button
 		>
 		<button class="w-fit border-2 p-1" on:click={() => loadCode(tsCode, 'typescript')}
 			>TypeScript</button
-		>
-		<button class="w-fit border-2 p-1" on:click={() => loadCode(phpCode, 'php')}>PHP</button>
-		<button class="w-fit border-2 p-1" on:click={() => loadCode(pyCode, 'python')}>Python</button>
-		<button class="w-fit border-2 p-1" on:click={() => loadCode(htmlCode, 'html')}>HTML</button>
+	 	>
+	 	<button class="w-fit border-2 p-1" on:click={() => loadCode(phpCode, 'php')}>PHP</button>
+	 	<button class="w-fit border-2 p-1" on:click={() => loadCode(pyCode, 'python')}>Python</button>
+		<button class="w-fit border-2 p-1" on:click={() => loadCode(htmlCode, 'html')}>HTML</button>  -->
 	</div>
 	<div class="flex flex-grow">
 		<div class="w-64 border-r overflow-auto p-2">

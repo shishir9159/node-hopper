@@ -1,16 +1,10 @@
-# sveltekit-monaco-editor
+# node hopper
 
-Simple and quick demo about how to use Monaco Editor in SvelteKit.
-
-## How to use?
+## run
 
 Clone this repo and run `npm install` to install all dependencies including Monaco Editor.
 
 Then run `npm run dev` to start the dev server.
-
-## Use case
-
-- [x] Use Monaco Editor in SvelteKit.
 
 ## References
 
@@ -20,3 +14,7 @@ Then run `npm run dev` to start the dev server.
 - https://github.com/microsoft/monaco-editor/blob/main/samples/browser-esm-vite-react/src/main.tsx (I like this)
 - https://stackoverflow.com/questions/50488442/monaco-editor-breakpoint-functionality
 - https://stackoverflow.com/questions/70619511/go-delve-remote-debugging-does-not-work-with-docker-network-mode-host
+
+
+## Roadmap
+- [ ] Integrate [VS Code Server](https://github.com/coder/code-server)

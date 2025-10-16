@@ -9,7 +9,6 @@ export interface VfsNodeDir {
 export interface VfsNodeFile {
   type: 'file';
   name: string;
-  // UTF-8 decoded text content; for binary we keep bytes
   text?: string;
   bytes?: Uint8Array;
 }
@@ -39,5 +38,3 @@ export function setOpenFile(path: string | null, content: string | null) {
   openFile.set({ path, content });
   vfs.update((s) => ({ ...s, openFilePath: path }));
 }
-
-
