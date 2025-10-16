@@ -18,4 +18,5 @@ Then run `npm run dev` to start the dev server.
 - https://dev.to/lawrencecchen/monaco-editor-svelte-kit-572
 - https://www.codelantis.com/blog/sveltekit-monaco-editor
 - https://github.com/microsoft/monaco-editor/blob/main/samples/browser-esm-vite-react/src/main.tsx (I like this)
-- and many others
+- https://stackoverflow.com/questions/50488442/monaco-editor-breakpoint-functionality
+- https://stackoverflow.com/questions/70619511/go-delve-remote-debugging-does-not-work-with-docker-network-mode-host
