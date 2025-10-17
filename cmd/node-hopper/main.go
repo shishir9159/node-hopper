@@ -24,25 +24,32 @@ func main() {
 		cmd.Stderr = os.Stderr
 
 		if err := cmd.Start(); err != nil {
+			fmt.Println(err)
 			log.Fatal(err)
 		}
 	}()
 
 	client := rpc2.NewClient("localhost:8080")
-	defer client.Disconnect(true)
+	defer func(client *rpc2.RPCClient, cont bool) {
+		err := client.Disconnect(cont)
+		if err != nil {
+			fmt.Println(err)
+			log.Fatal(err)
+		}
+	}(client, true)
 
-	state, err := conn.GetState()
+	state, err := client.GetState()
 	if err != nil {
 		log.Fatalf("Failed to get state: %v", err)
 	}
-	fmt.Printf("Current state: %s\n", state.String())
+	fmt.Printf("Current state: %s\n", state.CurrentThread.BreakpointInfo)
 
-	goroutines, err := client.ListGoroutines()
+	goroutines, count, err := client.ListGoroutines(1, 10)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	fmt.Println("Active goroutines:")
+	fmt.Printf("Active goroutine count: %d\n", count)
 	for _, g := range goroutines {
 		fmt.Printf("ID: %d, CurrentLoc: %s\n", g.ID, g.UserCurrentLoc.Function.Name)
 	}
