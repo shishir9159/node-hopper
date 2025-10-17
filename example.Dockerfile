@@ -7,7 +7,7 @@ COPY examples/main.go go.* ./
 RUN go mod download
 RUN go build -gcflags "all=-N -l" -o main
 
-RUN go get github.com/derekparker/delve/cmd/dlv
+RUN go get github.com/go-delve/delve/cmd/dlv
 
 FROM golang:1.10.1-alpine3.7 AS build-env
 RUN apk add --no-cache libc6-compat
