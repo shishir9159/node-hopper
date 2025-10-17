@@ -7,10 +7,10 @@ COPY examples/main.go go.* ./
 RUN go mod download
 RUN go build -gcflags "all=-N -l" -o main
 
-FROM golang:1.10.1-alpine3.7 AS build-env
-ENV CGO_ENABLED 0
-RUN apk add --no-cache git libc6-compat
 RUN go get github.com/derekparker/delve/cmd/dlv
+
+FROM golang:1.10.1-alpine3.7 AS build-env
+RUN apk add --no-cache libc6-compat
 
 #FROM debian:bookworm-slim
 #RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
@@ -19,8 +19,9 @@ RUN go get github.com/derekparker/delve/cmd/dlv
 #    ca-certificates && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/main /app/server
+COPY --from=builder /go/bin/dlv /
 WORKDIR /app
 EXPOSE 40000
 
 # CMD ["/app/server"]
-CMD ["/go/bin/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--log", "exec", "/app/server"]
+CMD ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--log", "exec", "/app/server"]
