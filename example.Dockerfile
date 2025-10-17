@@ -7,10 +7,12 @@ COPY examples/main.go go.* ./
 RUN go mod download
 RUN go build -gcflags "all=-N -l" -o main
 
-FROM golang:1.10.1-alpine3.7 AS build-env
-RUN apk add --no-cache libc6-compat
+FROM golang:1.25.3-alpine3.22 AS build-env
 
-RUN go get github.com/go-delve/delve/cmd/dlv
+RUN apk add --no-cache git libc6-compat
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+#RUN go get github.com/go-delve/delve/cmd/dlv
+
 #FROM debian:bookworm-slim
 #RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
 #    --mount=target=/var/cache/apt/,type=cache,sharing=locked \
