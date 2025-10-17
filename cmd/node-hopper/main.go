@@ -12,22 +12,22 @@ import (
 
 func main() {
 
-	go func() {
-		cmd := exec.Command("dlv", "exec", "./myapp",
-			"--headless",
-			"--listen=:8080",
-			"--api-version=2",
-			"--log",
-		)
+	// go func() {
+	// 	cmd := exec.Command("dlv", "exec", "./myapp",
+	// 		"--headless",
+	// 		"--listen=:8080",
+	// 		"--api-version=2",
+	// 		"--log",
+	// 	)
 
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
+	// 	cmd.Stdout = os.Stdout
+	// 	cmd.Stderr = os.Stderr
 
-		if err := cmd.Start(); err != nil {
-			fmt.Println(err)
-			log.Fatal(err)
-		}
-	}()
+	// 	if err := cmd.Start(); err != nil {
+	// 		fmt.Println(err)
+	// 		log.Fatal(err)
+	// 	}
+	// }()
 
 	client := rpc2.NewClient("localhost:8080")
 	defer func(client *rpc2.RPCClient, cont bool) {

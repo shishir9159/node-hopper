@@ -14,6 +14,9 @@ Then run `npm run dev` to start the dev server.
 - https://github.com/microsoft/monaco-editor/blob/main/samples/browser-esm-vite-react/src/main.tsx (I like this)
 - https://stackoverflow.com/questions/50488442/monaco-editor-breakpoint-functionality
 - https://stackoverflow.com/questions/70619511/go-delve-remote-debugging-does-not-work-with-docker-network-mode-host
+- https://blog.gopheracademy.com/advent-2018/postmortem-debugging-delve/
+- https://medium.com/@zsh-eng/integrating-lsp-with-the-monaco-code-editor-b054e9b5421f
+
 
 
 ## Roadmap
