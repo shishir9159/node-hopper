@@ -1,17 +1,16 @@
-// import * as vscode from 'vscode';
-// Import Monaco Language Client components
-import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
-import type { MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
-import type { LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
-import type { EditorAppConfig } from 'monaco-languageclient/editorApp';
-import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
-// import type * from 'vscode-uri';
+
+import * as vscode from 'vscode';
 import ReactDOM from 'react-dom/client';
+import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
+import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
+import type { EditorAppConfig } from 'monaco-languageclient/editorApp';
+import type { LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
+import type { MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
 
 export const createEditorAndLanguageClient = async () => {
-    const languageId = 'mylang';
+    const languageId = 'go';
     const code = '// initial editor content';
-    const codeUri = '/workspace/hello.mylang';
+    const codeUri = '/workspace/hello.go';
 
     // Monaco VSCode API configuration
     const vscodeApiConfig: MonacoVscodeApiConfig = {
@@ -34,17 +33,16 @@ export const createEditorAndLanguageClient = async () => {
         connection: {
             options: {
                 $type: 'WebSocketUrl',
-                // at this url the language server for myLang must be reachable
-                url: 'ws://localhost:30000/myLangLS'
+                url: 'ws://40.81.242.254:3000/'
             }
         },
         clientOptions: {
             documentSelector: [languageId],
-            // workspaceFolder: {
-            //     index: 0,
-            //     name: 'workspace',
-            //     uri: vscode.Uri.file('/workspace')
-            // }
+            workspaceFolder: {
+                index: 0,
+                name: 'workspace',
+                uri: vscode.Uri.file('/workspace')
+            }
         }
     };
 
@@ -66,7 +64,7 @@ export const createEditorAndLanguageClient = async () => {
                     vscodeApiConfig={vscodeApiConfig}
                     editorAppConfig={editorAppConfig}
                     languageClientConfig={languageClientConfig}
-                    style={{ 'height': '100%' }}
+                    style={{ 'height': '100vh', 'width': '100vh' }}
                     onError={(e) => {
                         console.error(e);
                     }} />
