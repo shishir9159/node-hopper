@@ -5,13 +5,13 @@ WORKDIR /app
 
 COPY examples/main.go go.* ./
 RUN go mod download
-RUN go build -C main.go -gcflags "all=-N -l" -o main
+RUN go build -gcflags "all=-N -l" -o main
 
 FROM golang:1.10.1-alpine3.7 AS build-env
 ENV CGO_ENABLED 0
-RUN apk add --no-cache git
+RUN apk add --no-cache git libc6-compat
 RUN go get github.com/derekparker/delve/cmd/dlv
-RUN apk add --no-cache libc6-compat
+
 #FROM debian:bookworm-slim
 #RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
 #    --mount=target=/var/cache/apt/,type=cache,sharing=locked \
