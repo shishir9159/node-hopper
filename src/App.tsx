@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Editor from './Editor'
 import './App.css'
 
 function App() {
@@ -27,8 +26,8 @@ function App() {
       </p>
     </>
   )
-}
+} 
 
-<Editor />
+<EditorApp />
 
 export default App

@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codingame/monaco-vscode-api": "^22.1.0",
     "@typefox/monaco-editor-react": "^7.2.0",
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api",
     "monaco-languageclient": "^10.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "vscode": "npm:@codingame/monaco-vscode-extension-api",
+    "vscode-uri": "^3.1.0",
     "vscode-ws-jsonrpc": "^3.5.0"
   },
   "devDependencies": {
