@@ -3,19 +3,24 @@ FROM golang:1.25.1-trixie AS builder
 ENV CGO_ENABLED 0
 WORKDIR /app
 
-COPY . ./
+COPY examples/main.go go.* ./
 RUN go mod download
 RUN go build -C main.go -gcflags "all=-N -l" -o main
 
-FROM debian:bookworm-slim
-RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
-    --mount=target=/var/cache/apt/,type=cache,sharing=locked \
-    set -x && apt-get update && apt-get install -y \
-    ca-certificates && rm -rf /var/lib/apt/lists/*
+FROM golang:1.10.1-alpine3.7 AS build-env
+ENV CGO_ENABLED 0
+RUN apk add --no-cache git
+RUN go get github.com/derekparker/delve/cmd/dlv
+RUN apk add --no-cache libc6-compat
+#FROM debian:bookworm-slim
+#RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+#    --mount=target=/var/cache/apt/,type=cache,sharing=locked \
+#    set -x && apt-get update && apt-get install -y \
+#    ca-certificates && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/cmd/patch-upgrade/main /app/server
+COPY --from=builder /app/main /app/server
 WORKDIR /app
 EXPOSE 40000
 
 # CMD ["/app/server"]
-CMD ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--log", "exec", "/app/server"]
+CMD ["/go/bin/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--log", "exec", "/app/server"]
