@@ -5,7 +5,12 @@
       "name": "node-hopper",
       "dependencies": {
         "@codingame/monaco-vscode-api": "^22.1.0",
+        "@codingame/monaco-vscode-go-default-extension": "^22.1.0",
         "@codingame/monaco-vscode-keybindings-service-override": "^22.1.0",
+        "@codingame/monaco-vscode-languages-service-override": "^22.1.0",
+        "@codingame/monaco-vscode-textmate-service-override": "^22.1.0",
+        "@codingame/monaco-vscode-theme-defaults-default-extension": "^22.1.0",
+        "@codingame/monaco-vscode-theme-service-override": "^22.1.0",
         "@typefox/monaco-editor-react": "^7.2.0",
         "@types/vscode": "~1.105.0",
         "editorconfig": "^3.0.1",
@@ -269,6 +274,8 @@
     "@codingame/monaco-vscode-ff9fa663-eae3-5274-8573-c2b918871e4b-common": ["@codingame/monaco-vscode-ff9fa663-eae3-5274-8573-c2b918871e4b-common@22.1.0", "", {}, "sha512-zI3l0OUONXjGmCk4jWmtBfJKsQxRwSrWF41iLcs/NKBjTF7MTimNjBWfcQFOUO8pV5KaZwlw8BZdrAPiPAHJ0g=="],
 
     "@codingame/monaco-vscode-files-service-override": ["@codingame/monaco-vscode-files-service-override@22.1.0", "", { "dependencies": { "@codingame/monaco-vscode-0c06bfba-d24d-5c4d-90cd-b40cefb7f811-common": "22.1.0", "@codingame/monaco-vscode-15626ec7-b165-51e1-8caf-7bcc2ae9b95a-common": "22.1.0", "@codingame/monaco-vscode-2f06fe84-148e-5e6b-a7ca-c7989c5f128a-common": "22.1.0", "@codingame/monaco-vscode-60014c9d-b815-501d-83a9-4b08725c2ec2-common": "22.1.0", "@codingame/monaco-vscode-api": "22.1.0", "@codingame/monaco-vscode-caeb744c-8e3f-5c11-80fb-0f057d24d544-common": "22.1.0", "@codingame/monaco-vscode-cea4d01f-6526-5c2f-8b09-b168fead499f-common": "22.1.0" } }, "sha512-lUHFHAFeFdNzjaLcciyl9KOxCKFfgWslJ3isLN9x7Tftd4W896m/+/nKPgKiYnMhh+hZD+B/lxhx4u/zYW9Z6A=="],
+
+    "@codingame/monaco-vscode-go-default-extension": ["@codingame/monaco-vscode-go-default-extension@22.1.0", "", { "dependencies": { "@codingame/monaco-vscode-api": "22.1.0" } }, "sha512-FJ4HPjOqLUCh4UA9taU9sU6gK6OaA0WldsYxemi/6WaHI9veyVpVojLxXHAzdCawklbR8EbvANZRuG82r6r5DA=="],
 
     "@codingame/monaco-vscode-host-service-override": ["@codingame/monaco-vscode-host-service-override@22.1.0", "", { "dependencies": { "@codingame/monaco-vscode-158b9837-fc78-5d9c-86f5-9134e4358643-common": "22.1.0", "@codingame/monaco-vscode-4bf376c2-03c7-58cb-8303-c67aeefa3d3d-common": "22.1.0", "@codingame/monaco-vscode-60014c9d-b815-501d-83a9-4b08725c2ec2-common": "22.1.0", "@codingame/monaco-vscode-api": "22.1.0" } }, "sha512-G4WyLJK44HUXFoJkuNKkM1C5Vj3M2i262s2zeYV2SHf1sZvee/c7TyxlqhoRlanCIcUwHSEDb87NzBIPBWEgug=="],
 
