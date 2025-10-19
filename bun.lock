@@ -8,7 +8,6 @@
         "@typefox/monaco-editor-react": "^7.2.0",
         "@types/vscode": "~1.105.0",
         "_monaco-editor": "npm:@codingame/monaco-vscode-editor-api",
-        "_vscode": "npm:@codingame/monaco-vscode-extension-api",
         "editorconfig": "^3.0.1",
         "esbuild": "^0.25.11",
         "monaco-editor": "0.54.0",
@@ -488,7 +487,7 @@
 
     "@types/json-schema": ["@types/json-schema@7.0.15", "", {}, "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="],
 
-    "@types/node": ["@types/node@24.9.0", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-MKNwXh3seSK8WurXF7erHPJ2AONmMwkI7zAMrXZDPIru8jRqkk6rGDBVbw4mLwfqA+ZZliiDPg05JQ3uW66tKQ=="],
+    "@types/node": ["@types/node@24.9.1", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-QoiaXANRkSXK6p0Duvt56W208du4P9Uye9hWLWgGMDTEoKPhuenzNcC4vGUmrNkiOKTlIrBoyNQYNpSwfEZXSg=="],
 
     "@types/react": ["@types/react@19.2.2", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-6mDvHUFSjyT2B2yeNx2nUgMxh9LtOWvkhIU3uePn2I2oyNymUAX1NIsdgviM4CH+JSrp2D2hsMvJOkxY+0wNRA=="],
 
@@ -523,8 +522,6 @@
     "@vscode/iconv-lite-umd": ["@vscode/iconv-lite-umd@0.7.0", "", {}, "sha512-bRRFxLfg5dtAyl5XyiVWz/ZBPahpOpPrNYnnHpOpUZvam4tKH35wdhP4Kj6PbM0+KdliOsPzbGWpkxcdpNB/sg=="],
 
     "_monaco-editor": ["@codingame/monaco-vscode-editor-api@22.1.0", "", { "dependencies": { "@codingame/monaco-vscode-5452e2b7-9081-5f95-839b-4ab3544ce28f-common": "22.1.0", "@codingame/monaco-vscode-api": "22.1.0" } }, "sha512-tWk4S6kb/aKdKWcmO1xrQiBhtWZQCIZC5rS64dCUEKoUuWpBEALSE+8nP5JPN/UrDns4npWqaybV+Kbouag5rg=="],
-
-    "_vscode": ["@codingame/monaco-vscode-extension-api@22.1.0", "", { "dependencies": { "@codingame/monaco-vscode-4a3ac544-9a61-534c-88df-756262793ef7-common": "22.1.0", "@codingame/monaco-vscode-4bf376c2-03c7-58cb-8303-c67aeefa3d3d-common": "22.1.0", "@codingame/monaco-vscode-api": "22.1.0", "@codingame/monaco-vscode-extensions-service-override": "22.1.0" } }, "sha512-Ym6YVpQtAY6rhkxAnA+yFdW0KublgeiTCPW55rPQaBJfC8FBzoqD2ZtFwj5Z/N9rKhHcdfEese8wQaYyhAw6Xw=="],
 
     "acorn": ["acorn@8.15.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg=="],
 

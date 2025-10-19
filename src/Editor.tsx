@@ -1,4 +1,3 @@
-
 import * as vscode from 'vscode';
 import ReactDOM from 'react-dom/client';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
@@ -8,8 +7,9 @@ import type { LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
 import type { MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
 
 export const createEditorAndLanguageClient = async () => {
+
     const languageId = 'go';
-    const code = '// initial editor content';
+    const code = 'add your github repository';
     const codeUri = '/workspace/hello.go';
 
     // Monaco VSCode API configuration
@@ -20,7 +20,7 @@ export const createEditorAndLanguageClient = async () => {
         },
         userConfiguration: {
             json: JSON.stringify({
-                'workbench.colorTheme': 'Default Dark Modern',
+                // 'workbench.colorTheme': 'Default Dark Modern',
                 'editor.wordBasedSuggestions': 'off'
             })
         },
@@ -33,7 +33,7 @@ export const createEditorAndLanguageClient = async () => {
         connection: {
             options: {
                 $type: 'WebSocketUrl',
-                url: 'ws://40.81.242.254:3000/'
+                url: 'ws://localhost:3000'
             }
         },
         clientOptions: {
@@ -49,6 +49,10 @@ export const createEditorAndLanguageClient = async () => {
     // editor app / monaco-editor configuration
     const editorAppConfig: EditorAppConfig = {
         codeResources: {
+            original: {
+                text: code,
+                uri: codeUri
+            },
             modified: {
                 text: code,
                 uri: codeUri
@@ -64,7 +68,7 @@ export const createEditorAndLanguageClient = async () => {
                     vscodeApiConfig={vscodeApiConfig}
                     editorAppConfig={editorAppConfig}
                     languageClientConfig={languageClientConfig}
-                    style={{ 'height': '100vh', 'width': '100vh' }}
+                    style={{ 'height': '500px', 'display': 'flex', 'overflow': 'hidden' }}
                     onError={(e) => {
                         console.error(e);
                     }} />
