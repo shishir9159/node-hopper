@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import { EditorApp, type EditorAppConfig } from 'monaco-languageclient/editorApp';
 import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
+import { } from '@codingame/monaco-vscode-api';
 // import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { LanguageClientWrapper, type LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
 import { MonacoVscodeApiWrapper, type MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
