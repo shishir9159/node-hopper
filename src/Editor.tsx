@@ -17,7 +17,6 @@ export const createEditorAndLanguageClient = async () => {
         
     // }
 
-    // Monaco VSCode API configuration
     const vscodeApiConfig: MonacoVscodeApiConfig = {
         $type: 'extended',
         viewsConfig: {
@@ -32,7 +31,6 @@ export const createEditorAndLanguageClient = async () => {
         monacoWorkerFactory: configureDefaultWorkerFactory
     };
 
-    // Language client configuration
     const goClientConfig: LanguageClientConfig = {
         languageId: 'go',
         connection: {
@@ -59,7 +57,6 @@ export const createEditorAndLanguageClient = async () => {
         }
     };
 
-    // editor app / monaco-editor configuration
     const editorAppConfig: EditorAppConfig = {
         codeResources: {
             original: {
@@ -73,16 +70,16 @@ export const createEditorAndLanguageClient = async () => {
         }
     };
 
-    const apiWrapper = new MonacoVscodeApiWrapper(vscodeApiConfig);
-    await apiWrapper.start();
+    // const apiWrapper = new MonacoVscodeApiWrapper(vscodeApiConfig);
+    // await apiWrapper.start();
 
-    const lcWrapper = new LanguageClientWrapper(goClientConfig);
-    await lcWrapper.start();
+    // const lcWrapper = new LanguageClientWrapper(goClientConfig);
+    // await lcWrapper.start();
 
-    const editorApp = new EditorApp(editorAppConfig);
-    const htmlContainer = document.getElementById('react-root')!;
-    // const htmlContainer = document.getElementById('monaco-editor-root')!;
-    await editorApp.start(htmlContainer);
+    // const editorApp = new EditorApp(editorAppConfig);
+    // const htmlContainer = document.getElementById('react-root')!;
+    // // const htmlContainer = document.getElementById('monaco-editor-root')!;
+    // await editorApp.start(htmlContainer);
 
     const root = ReactDOM.createRoot(document.getElementById('react-root')!);
     const App = () => {
@@ -99,6 +96,7 @@ export const createEditorAndLanguageClient = async () => {
             </div>
         );
     };
+
     root.render(<App />);
 };
 
