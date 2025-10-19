@@ -1,7 +1,6 @@
 import { type RegisterLocalProcessExtensionResult } from '@codingame/monaco-vscode-api/extensions';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import type { MonacoVscodeApiWrapper } from 'monaco-languageclient/vscodeApiWrapper';
-// import React from 'react';
 import ReactDOM from 'react-dom/client';
 import * as vscode from 'vscode';
 import { configureDebugging } from 'monaco-languageclient/debugger';
