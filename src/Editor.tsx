@@ -84,22 +84,22 @@ export const createEditorAndLanguageClient = async () => {
     // const htmlContainer = document.getElementById('monaco-editor-root')!;
     await editorApp.start(htmlContainer);
 
-    // const root = ReactDOM.createRoot(document.getElementById('react-root')!);
-    // const App = () => {
-    //     return (
-    //         <div style={{ 'backgroundColor': '#1f1f1f' }} >
-    //             <MonacoEditorReactComp
-    //                 vscodeApiConfig={vscodeApiConfig}
-    //                 editorAppConfig={editorAppConfig}
-    //                 languageClientConfig={goClientConfig}
-    //                 style={{ 'height': '500px', 'display': 'flex', 'overflow': 'hidden' }}
-    //                 onError={(e) => {
-    //                     console.error(e);
-    //                 }} />
-    //         </div>
-    //     );
-    // };
-    // root.render(<App />);
+    const root = ReactDOM.createRoot(document.getElementById('react-root')!);
+    const App = () => {
+        return (
+            <div style={{ 'backgroundColor': '#1f1f1f' }} >
+                <MonacoEditorReactComp
+                    vscodeApiConfig={vscodeApiConfig}
+                    editorAppConfig={editorAppConfig}
+                    languageClientConfig={goClientConfig}
+                    style={{ 'height': '500px', 'display': 'flex', 'overflow': 'hidden' }}
+                    onError={(e) => {
+                        console.error(e);
+                    }} />
+            </div>
+        );
+    };
+    root.render(<App />);
 };
 
 createEditorAndLanguageClient();
