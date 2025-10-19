@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-
 import * as vscode from 'vscode';
 import ReactDOM from 'react-dom/client';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';

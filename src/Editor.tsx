@@ -1,142 +1,39 @@
-import * as vscode from 'vscode';
-import ReactDOM from 'react-dom/client';
-import '@codingame/monaco-vscode-go-default-extension';
+import { type RegisterLocalProcessExtensionResult } from '@codingame/monaco-vscode-api/extensions';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
-import { EditorApp, type EditorAppConfig } from 'monaco-languageclient/editorApp';
-import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
-// import "vscode/localExtensionHost";
-import { WebSocketMessageReader, WebSocketMessageWriter, toSocket } from 'vscode-ws-jsonrpc';
-import { CloseAction, ErrorAction } from 'vscode-languageclient/browser.js';
-import { MonacoLanguageClient, type MonacoLanguageClientOptions } from 'monaco-languageclient';
-// import { } from '@codingame/monaco-vscode-api';
-// import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
-import { LanguageClientWrapper, type LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
-import { MonacoVscodeApiWrapper, type MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
+import type { MonacoVscodeApiWrapper } from 'monaco-languageclient/vscodeApiWrapper';
+// import React from 'react';
+import ReactDOM from 'react-dom/client';
+import * as vscode from 'vscode';
+import { configureDebugging } from 'monaco-languageclient/debugger';
+import { createPythonAppConfig } from './config.ts';
 
+export const runPythonReact = async () => {
+    const appConfig = createPythonAppConfig();
 
-export const createEditorAndLanguageClient = async () => {
+    const onVscodeApiInitDone = async (apiWrapper: MonacoVscodeApiWrapper) => {
 
-    const codeUri = '/workspace/hello.go';
+        const result = apiWrapper.getExtensionRegisterResult('mlc-python-example') as RegisterLocalProcessExtensionResult;
+        result.setAsDefaultApi();
 
-    // const wrapperConfig: WrapperConfig = {
-    //     $type: 'extended',
-        
-    // }
-
-    const vscodeApiConfig: MonacoVscodeApiConfig = {
-        $type: 'extended',
-        viewsConfig: {
-            $type: 'EditorService'
-        },
-        userConfiguration: {
-            json: JSON.stringify({
-                'workbench.colorTheme': 'Default Dark Modern',
-                'editor.wordBasedSuggestions': 'off'
-            })
-        },
-        monacoWorkerFactory: configureDefaultWorkerFactory
-    };
-
-    const goClientConfig: LanguageClientConfig = {
-        languageId: 'go',
-        connection: {
-            options: {
-                $type: 'WebSocketUrl',
-                url: 'ws://localhost:30000'
-            }
-        },
-        clientOptions: {
-            documentSelector: ['go'],
-            workspaceFolder: {
-                index: 0,
-                name: 'workspace',
-                uri: vscode.Uri.file('/workspace')
-            },
-            initializationOptions: {
-                go: {
-                    analyses: {
-                        unusedparams: true
-                    },
-                    staticcheck: true
-                }
-            } 
-        },
-        // enforceDispose: true
-    };
-
-
-    // const webSocket = new WebSocket("ws://localhost:30000");
-    // const socket = toSocket(webSocket);
-    // const reader = new WebSocketMessageReader(socket);
-    // const writer = new WebSocketMessageWriter(socket);
-    // const p: MonacoLanguageClientOptions = {
-    //     name: 'Go',
-    //     clientOptions: {
-    //         // use a language id as a document selector
-    //         documentSelector: ['go'],
-    //         // disable the default error handler
-    //         errorHandler: {
-    //             error: () => ({ action: ErrorAction.Continue }),
-    //             closed: () => ({ action: CloseAction.DoNotRestart })
-    //         }
-    //     },
-    //     messageTransports: {
-    //         reader,
-    //         writer
-    //     }
-    // };
-    // const ppp = new MonacoLanguageClient({
-    //     name: 'Go',
-    //     clientOptions: {
-    //         // use a language id as a document selector
-    //         documentSelector: ['go'],
-    //         // disable the default error handler
-    //         errorHandler: {
-    //             error: () => ({ action: ErrorAction.Continue }),
-    //             closed: () => ({ action: CloseAction.DoNotRestart })
-    //         }
-    //     },
-
-    //     // create a language client connection from the JSON RPC connection on demand
-    //     messageTransports: {
-    //         reader,
-    //         writer
-    //     }
-    // });
-
-    const editorAppConfig: EditorAppConfig = {
-        codeResources: {
-            original: {
-                text: "add your github repository...",
-                uri: codeUri
-            },
-            modified: {
-                text: "add your github repository...",
-                uri: codeUri
-            }
+        const initResult = apiWrapper.getExtensionRegisterResult('debugger-py-client') as RegisterLocalProcessExtensionResult | undefined;
+        if (initResult !== undefined) {
+            configureDebugging(await initResult.getApi(), appConfig.configParams);
         }
+
+        await vscode.commands.executeCommand('workbench.view.explorer');
+        await vscode.window.showTextDocument(appConfig.configParams.files.get('hello2.py')!.uri);
     };
-
-    // const apiWrapper = new MonacoVscodeApiWrapper(vscodeApiConfig);
-    // await apiWrapper.start();
-
-    // const lcWrapper = new LanguageClientWrapper(goClientConfig);
-    // await lcWrapper.start();
-
-    // const editorApp = new EditorApp(editorAppConfig);
-    // const htmlContainer = document.getElementById('react-root')!;
-    // // const htmlContainer = document.getElementById('monaco-editor-root')!;
-    // await editorApp.start(htmlContainer);
 
     const root = ReactDOM.createRoot(document.getElementById('react-root')!);
     const App = () => {
         return (
-            <div style={{ 'backgroundColor': '#1f1f1f' }} >
+            <div style={{ 'backgroundColor': '#383838ff' }} >
                 <MonacoEditorReactComp
-                    vscodeApiConfig={vscodeApiConfig}
-                    editorAppConfig={editorAppConfig}
-                    languageClientConfig={goClientConfig}
-                    style={{ 'height': '500px', 'display': 'flex', 'overflow': 'hidden' }}
+                    vscodeApiConfig={appConfig.vscodeApiConfig}
+                    editorAppConfig={appConfig.editorAppConfig}
+                    languageClientConfig={appConfig.languageClientConfig}
+                    style={{ 'height': '100%', 'width': '100%' }}
+                    onVscodeApiInitDone={onVscodeApiInitDone}
                     onError={(e) => {
                         console.error(e);
                     }} />
@@ -147,4 +44,4 @@ export const createEditorAndLanguageClient = async () => {
     root.render(<App />);
 };
 
-createEditorAndLanguageClient();
+runPythonReact();

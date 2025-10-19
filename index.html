@@ -10,6 +10,13 @@
     <!-- <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script> -->
     <div id="react-root"></div>
-    <script type="module" src="/src/Editor.tsx"></script>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/views.css">
+    <script type="module" rel="modulepreload">
+        import { runPythonWrapper } from "./src/main.ts";
+
+        runPythonWrapper();
+    </script>    
+    <!-- <script type="module" src="/src/Editor.tsx"></script> -->
   </body>
 </html>
