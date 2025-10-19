@@ -361,7 +361,7 @@ export const createGoAppConfig = (): GoAppConfig => {
             {
                 config: {
                     name:"go",
-                    version:"1.0.0",
+                    version:"0.50.0",
                     publisher:"vscode",
                     engines:{
                         vscode:"*"

@@ -1,36 +1,36 @@
-import { type RegisterLocalProcessExtensionResult } from '@codingame/monaco-vscode-api/extensions';
-import { EditorApp } from 'monaco-languageclient/editorApp';
-import { LanguageClientWrapper } from 'monaco-languageclient/lcwrapper';
-import { MonacoVscodeApiWrapper } from 'monaco-languageclient/vscodeApiWrapper';
-import * as vscode from 'vscode';
-import { configureDebugging } from 'monaco-languageclient/debugger';
-import { createPythonAppConfig } from './config.js';
+// import { type RegisterLocalProcessExtensionResult } from '@codingame/monaco-vscode-api/extensions';
+// import { EditorApp } from 'monaco-languageclient/editorApp';
+// import { LanguageClientWrapper } from 'monaco-languageclient/lcwrapper';
+// import { MonacoVscodeApiWrapper } from 'monaco-languageclient/vscodeApiWrapper';
+// import * as vscode from 'vscode';
+// import { configureDebugging } from 'monaco-languageclient/debugger';
+// import { createPythonAppConfig } from './config.js';
 
-export const runPythonWrapper = async () => {
+// export const runPythonWrapper = async () => {
 
-    const appConfig = createPythonAppConfig();
+//     const appConfig = createPythonAppConfig();
 
-    // perform global monaco-vscode-api init
-    const apiWrapper = new MonacoVscodeApiWrapper(appConfig.vscodeApiConfig);
-    await apiWrapper.start();
+//     // perform global monaco-vscode-api init
+//     const apiWrapper = new MonacoVscodeApiWrapper(appConfig.vscodeApiConfig);
+//     await apiWrapper.start();
 
-    const editorApp = new EditorApp(appConfig.editorAppConfig);
-    const lcWrapper = new LanguageClientWrapper(appConfig.languageClientConfig);
+//     const editorApp = new EditorApp(appConfig.editorAppConfig);
+//     const lcWrapper = new LanguageClientWrapper(appConfig.languageClientConfig);
 
-    if (editorApp.isStarted()) {
-        console.warn('Editor was already started!');
-    } else {
-        const result = apiWrapper.getExtensionRegisterResult('mlc-python-example') as RegisterLocalProcessExtensionResult;
-        result.setAsDefaultApi();
+//     if (editorApp.isStarted()) {
+//         console.warn('Editor was already started!');
+//     } else {
+//         const result = apiWrapper.getExtensionRegisterResult('mlc-python-example') as RegisterLocalProcessExtensionResult;
+//         result.setAsDefaultApi();
 
-        const initResult = apiWrapper.getExtensionRegisterResult('debugger-py-client') as RegisterLocalProcessExtensionResult | undefined;
-        if (initResult !== undefined) {
-            configureDebugging(await initResult.getApi(), appConfig.configParams);
-        }
+//         const initResult = apiWrapper.getExtensionRegisterResult('debugger-py-client') as RegisterLocalProcessExtensionResult | undefined;
+//         if (initResult !== undefined) {
+//             configureDebugging(await initResult.getApi(), appConfig.configParams);
+//         }
 
-        await lcWrapper.start();
+//         await lcWrapper.start();
 
-        await vscode.commands.executeCommand('workbench.view.explorer');
-        await vscode.window.showTextDocument(appConfig.configParams.files.get('hello2.py')!.uri);
-    }
-};
+//         await vscode.commands.executeCommand('workbench.view.explorer');
+//         await vscode.window.showTextDocument(appConfig.configParams.files.get('hello2.py')!.uri);
+//     }
+// };
