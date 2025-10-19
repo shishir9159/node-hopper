@@ -1,26 +1,28 @@
 import * as vscode from 'vscode';
 import ReactDOM from 'react-dom/client';
+import { LanguageClient } from 'vscode-languageclient/node';
+import { MonacoVscodeApiWrapper, type MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
 import type { EditorAppConfig } from 'monaco-languageclient/editorApp';
+import { LanguageClientWrapper } from 'monaco-languageclient/lcwrapper';
 import type { LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
-import type { MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
+// import type { MonacoVscodeApiConfig } from 'monaco-languageclient/vscodeApiWrapper';
 
 export const createEditorAndLanguageClient = async () => {
 
-    const languageId = 'go';
-    const code = 'add your github repository';
     const codeUri = '/workspace/hello.go';
 
     // Monaco VSCode API configuration
     const vscodeApiConfig: MonacoVscodeApiConfig = {
         $type: 'extended',
+            htmlContainer: document.getElementById('monaco-editor-root')!
         viewsConfig: {
             $type: 'EditorService'
         },
         userConfiguration: {
             json: JSON.stringify({
-                // 'workbench.colorTheme': 'Default Dark Modern',
+                'workbench.colorTheme': 'Default Dark Modern',
                 'editor.wordBasedSuggestions': 'off'
             })
         },
@@ -28,21 +30,30 @@ export const createEditorAndLanguageClient = async () => {
     };
 
     // Language client configuration
-    const languageClientConfig: LanguageClientConfig = {
-        languageId,
+
+    const goClientConfig: LanguageClientConfig = {
+        languageId: 'go',
         connection: {
             options: {
                 $type: 'WebSocketUrl',
-                url: 'ws://localhost:3000'
+                url: 'ws://localhost:30000/go-ls'
             }
         },
         clientOptions: {
-            documentSelector: [languageId],
+            documentSelector: ['go'],
             workspaceFolder: {
                 index: 0,
                 name: 'workspace',
                 uri: vscode.Uri.file('/workspace')
-            }
+            },
+            initializationOptions: {
+                go: {
+                    analyses: {
+                        unusedparams: true
+                    },
+                    staticcheck: true
+                }
+            } 
         }
     };
 
@@ -50,11 +61,11 @@ export const createEditorAndLanguageClient = async () => {
     const editorAppConfig: EditorAppConfig = {
         codeResources: {
             original: {
-                text: code,
+                text: "add your github repository...",
                 uri: codeUri
             },
             modified: {
-                text: code,
+                text: "add your github repository...",
                 uri: codeUri
             }
         }
@@ -67,7 +78,7 @@ export const createEditorAndLanguageClient = async () => {
                 <MonacoEditorReactComp
                     vscodeApiConfig={vscodeApiConfig}
                     editorAppConfig={editorAppConfig}
-                    languageClientConfig={languageClientConfig}
+                    languageClientConfig={goClientConfig}
                     style={{ 'height': '500px', 'display': 'flex', 'overflow': 'hidden' }}
                     onError={(e) => {
                         console.error(e);
@@ -76,6 +87,23 @@ export const createEditorAndLanguageClient = async () => {
         );
     };
     root.render(<App />);
+
+
+
+    const apiWrapper = new MonacoVscodeApiWrapper(vscodeApiConfig);
+await apiWrapper.start();
+
+// 2) create LanguageClientWrapper  
+const lcWrapper = new LanguageClientWrapper(goClientConfig);
+await lcWrapper.start();
+
+// 3) start the editor (e.g., EditorApp)  
+const editorApp = new EditorApp({
+  codeResources: {
+    main: { uri: '/workspace/main.go', text: '// your Go code' }
+  }
+});
+await editorApp.start(htmlContainer);
 };
 
 createEditorAndLanguageClient();
