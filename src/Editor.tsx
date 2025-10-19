@@ -1,9 +1,13 @@
 import * as vscode from 'vscode';
 import ReactDOM from 'react-dom/client';
+import '@codingame/monaco-vscode-go-default-extension';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import { EditorApp, type EditorAppConfig } from 'monaco-languageclient/editorApp';
 import { configureDefaultWorkerFactory } from 'monaco-languageclient/workerFactory';
-import "vscode/localExtensionHost";
+// import "vscode/localExtensionHost";
+import { WebSocketMessageReader, WebSocketMessageWriter, toSocket } from 'vscode-ws-jsonrpc';
+import { CloseAction, ErrorAction } from 'vscode-languageclient/browser.js';
+import { MonacoLanguageClient, type MonacoLanguageClientOptions } from 'monaco-languageclient';
 // import { } from '@codingame/monaco-vscode-api';
 // import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { LanguageClientWrapper, type LanguageClientConfig } from 'monaco-languageclient/lcwrapper';
@@ -38,7 +42,7 @@ export const createEditorAndLanguageClient = async () => {
         connection: {
             options: {
                 $type: 'WebSocketUrl',
-                url: 'ws://localhost:30000/go-ls'
+                url: 'ws://localhost:30000'
             }
         },
         clientOptions: {
@@ -56,8 +60,49 @@ export const createEditorAndLanguageClient = async () => {
                     staticcheck: true
                 }
             } 
-        }
+        },
+        // enforceDispose: true
     };
+
+
+    // const webSocket = new WebSocket("ws://localhost:30000");
+    // const socket = toSocket(webSocket);
+    // const reader = new WebSocketMessageReader(socket);
+    // const writer = new WebSocketMessageWriter(socket);
+    // const p: MonacoLanguageClientOptions = {
+    //     name: 'Go',
+    //     clientOptions: {
+    //         // use a language id as a document selector
+    //         documentSelector: ['go'],
+    //         // disable the default error handler
+    //         errorHandler: {
+    //             error: () => ({ action: ErrorAction.Continue }),
+    //             closed: () => ({ action: CloseAction.DoNotRestart })
+    //         }
+    //     },
+    //     messageTransports: {
+    //         reader,
+    //         writer
+    //     }
+    // };
+    // const ppp = new MonacoLanguageClient({
+    //     name: 'Go',
+    //     clientOptions: {
+    //         // use a language id as a document selector
+    //         documentSelector: ['go'],
+    //         // disable the default error handler
+    //         errorHandler: {
+    //             error: () => ({ action: ErrorAction.Continue }),
+    //             closed: () => ({ action: CloseAction.DoNotRestart })
+    //         }
+    //     },
+
+    //     // create a language client connection from the JSON RPC connection on demand
+    //     messageTransports: {
+    //         reader,
+    //         writer
+    //     }
+    // });
 
     const editorAppConfig: EditorAppConfig = {
         codeResources: {

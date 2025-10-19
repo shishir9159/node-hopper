@@ -7,10 +7,12 @@ import { MonacoLanguageClient } from 'monaco-languageclient';
 export const initWebSocketAndStartClient = (url: string): WebSocket => {
     const webSocket = new WebSocket(url);
     webSocket.onopen = () => {
+
 	    // creating messageTransport
         const socket = toSocket(webSocket);
         const reader = new WebSocketMessageReader(socket);
         const writer = new WebSocketMessageWriter(socket);
+
         // creating language client
         const languageClient = createLanguageClient({
             reader,
@@ -18,10 +20,13 @@ export const initWebSocketAndStartClient = (url: string): WebSocket => {
         });
         languageClient.start();
         reader.onClose(() => languageClient.stop());
-    };    
+    };
+
     return webSocket;
 };
+
 const createLanguageClient = (messageTransports: MessageTransports): MonacoLanguageClient => {
+
     return new MonacoLanguageClient({
         name: 'Sample Language Client',
         clientOptions: {
