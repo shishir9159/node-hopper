@@ -11,6 +11,6 @@ NATIVE_ARCH := amd64
 
 .PHONY: example
 	@printf $(COLOR) "Building docker image for example and pushing it to the registry..."
-	#docker build . -t laplaciandemon/kapetanios:latest
+	#docker build . -t laplaciandemon/node-hopper:latest
 	docker build . -t laplaciandemon/example:latest -f example.Dockerfile
 	docker push laplaciandemon/example:latest

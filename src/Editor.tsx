@@ -4,11 +4,13 @@ import type { MonacoVscodeApiWrapper } from 'monaco-languageclient/vscodeApiWrap
 import ReactDOM from 'react-dom/client';
 import * as vscode from 'vscode';
 import { configureDebugging } from 'monaco-languageclient/debugger';
-import { createPythonAppConfig } from './config.ts';
+import { createGoAppConfig } from './config.ts';
+// import { createPythonAppConfig } from './config.ts';
 
 export const runPythonReact = async () => {
-    const appConfig = createPythonAppConfig();
 
+    // const appConfig = createPythonAppConfig();
+    const appConfig = createGoAppConfig();
     const onVscodeApiInitDone = async (apiWrapper: MonacoVscodeApiWrapper) => {
 
         const result = apiWrapper.getExtensionRegisterResult('mlc-python-example') as RegisterLocalProcessExtensionResult;

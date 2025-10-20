@@ -291,7 +291,7 @@ export const createGoAppConfig = (): GoAppConfig => {
             authorization: 'UserAuth'
         }
     });
-    const configParams = createDefaultConfigParams('/home/mlc', document.body);
+    const configParams = createDefaultGoConfigParams('/home/mlc', document.body);
     const webSocket = new WebSocket(url);
     const iWebSocket = toSocket(webSocket);
     const reader = new WebSocketMessageReader(iWebSocket);
