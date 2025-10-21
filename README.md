@@ -9,13 +9,9 @@ bun src/python/main.ts
 
 ---
 
-## Remote Debugging a Go Application in Docker with Delve
-
-This section explains how to build the example Dockerfile, run Delve inside a
-container on a remote server, and attach your local IDE to it.
+## Remote Debugging
 
 ### 1. Build the Docker image
-
 ```bash
 docker build -f example.Dockerfile -t myapp-debug .
 ```
@@ -23,12 +19,7 @@ docker build -f example.Dockerfile -t myapp-debug .
 ### 2. Run the container (expose the Delve port)
 
 ```bash
-docker run -d \
-  --name myapp-debug \
-  -p 40000:40000 \
-  --security-opt="apparmor=unconfined" \
-  --cap-add=SYS_PTRACE \
-  myapp-debug
+docker run -d --name myapp-debug -p 40000:40000  --security-opt="apparmor=unconfined" --cap-add=SYS_PTRACE myapp-debug
 ```
 
 ### 3. Connect from your local machine

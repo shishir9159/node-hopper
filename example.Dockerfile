@@ -3,7 +3,7 @@ FROM golang:1.25.1-trixie AS builder
 ENV CGO_ENABLED=0
 WORKDIR /app
 
-COPY examples/main.go go.* ./
+COPY examples/main.go go.* .
 RUN go mod download
 # libc6-compat
 RUN go build -gcflags "all=-N -l" -o main .
